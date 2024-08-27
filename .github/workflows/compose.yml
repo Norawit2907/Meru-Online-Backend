@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build App
-        run: docker-compose up --force-recreate --build --detach
+        run: docker compose up --force-recreate --build --detach
