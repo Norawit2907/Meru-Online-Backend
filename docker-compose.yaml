@@ -16,7 +16,7 @@ services:
 
   # start the mongodb service as container
   database:
-    image: mongo
+    image: mongo:4.4
     container_name: mongodb
     restart: always
     ports:
