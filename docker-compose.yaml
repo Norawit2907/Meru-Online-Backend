@@ -11,6 +11,7 @@ services:
       - '4000:3000'
     networks:
       - backend
+      - tunnel
     depends_on:
       - database
 
@@ -28,6 +29,8 @@ services:
 
 networks:
   backend:
+  tunnel:
+    external: true
 
 volumes:
   mongo-data:
