@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   NotFoundException,
@@ -47,17 +46,16 @@ export class UsersController {
     return user;
   }
 
-
   @Delete(':id')
   @HttpCode(204) // delete code
-  async deleteUserById(@Param('id') id: string){
+  async deleteUserById(@Param('id') id: string) {
     // check if your exist before delete
     const user = await this.usersService.getUserById(id);
-    if(!user){
+    if (!user) {
       throw new NotFoundException('User not found!');
     }
     await this.usersService.deleteUserById(id);
 
-    return {message: 'User Deleted Sucessfully'};
+    return { message: 'User Deleted Sucessfully' };
   }
 }
