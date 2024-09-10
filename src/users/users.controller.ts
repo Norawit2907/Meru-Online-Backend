@@ -25,6 +25,11 @@ export class UsersController {
     return await this.usersService.createUser(createUserDto);
   }
 
+  @Get()
+  async listUser(): Promise<User[]> {
+    return await this.usersService.listUsers();
+  }
+
   @Get(':id')
   async getUserById(@Param() id: string): Promise<User> {
     const user = await this.usersService.getUserById(id);
