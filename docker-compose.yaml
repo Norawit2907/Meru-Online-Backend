@@ -36,7 +36,7 @@ services:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: miniopassword
     volumes:
-      - ./volume:/data
+      - minio-data:/data/object
     command: server --address ":9001" --console-address ":9000" /data
     restart: always
     
@@ -48,3 +48,4 @@ networks:
 
 volumes:
   mongo-data:
+  minio-data:
