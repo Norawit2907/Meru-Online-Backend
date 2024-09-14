@@ -40,7 +40,6 @@ export class FileUploadController {
     if (!image) {
       throw new BadRequestException('Upload image failed!');
     }
-    console.log(image.mimetype);
     return await this.fileUploadService.uploadSingle(image);
   }
 

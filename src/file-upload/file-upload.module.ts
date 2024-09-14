@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { FileUploadService } from './file-upload.service';
 import { FileUploadController } from './file-upload.controller';
 import { MinioClientModule } from 'src/minio-client/minio-client.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [MinioClientModule],
+  imports: [ConfigModule, MinioClientModule],
   providers: [FileUploadService],
   controllers: [FileUploadController],
 })

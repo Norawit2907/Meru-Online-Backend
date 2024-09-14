@@ -2,21 +2,33 @@
 import { Injectable, Logger, HttpException, HttpStatus } from '@nestjs/common';
 import { MinioService } from 'nestjs-minio-client';
 // import { Stream } from 'stream';
-import { config } from './config';
 import { BufferedFile } from './file.model';
 import * as crypto from 'crypto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class MinioClientService {
   private readonly logger: Logger;
-  private readonly baseBucket = config.MINIO_BUCKET;
+  private readonly baseBucket: string;
+  private readonly minioEndpoint: string;
+  private readonly minioPort: string;
 
   public get client() {
     return this.minio.client;
   }
 
-  constructor(private readonly minio: MinioService) {
+  constructor(
+    private readonly minio: MinioService,
+    private readonly configService: ConfigService,
+  ) {
     this.logger = new Logger('MinioStorageService');
+    this.baseBucket = this.configService.get('MINIO_BUCKET', { infer: true });
+    this.minioEndpoint = this.configService.get('MINIO_ENDPOINT', {
+      infer: true,
+    });
+    this.minioPort = this.configService.get('MINIO_PORT', {
+      infer: true,
+    });
   }
 
   public async upload(
@@ -26,6 +38,11 @@ export class MinioClientService {
     if (!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))) {
       throw new HttpException('Error uploading file', HttpStatus.BAD_REQUEST);
     }
+
+    if (!(await this.client.bucketExists(this.baseBucket))) {
+      await this.client.makeBucket(this.baseBucket, this.client.region);
+    }
+
     const temp_filename = Date.now().toString();
     const hashedFileName = crypto
       .createHash('md5')
@@ -49,6 +66,7 @@ export class MinioClientService {
       metaData,
       function (err) {
         if (err) {
+          console.log(err);
           throw new HttpException(
             'Error uploading file',
             HttpStatus.BAD_REQUEST,
@@ -58,7 +76,7 @@ export class MinioClientService {
     );
 
     return {
-      url: `${config.MINIO_ENDPOINT}:${config.MINIO_PORT}/${config.MINIO_BUCKET}/${filename}`,
+      url: `${this.minioEndpoint}:${this.minioPort}/${this.baseBucket}/${filename}`,
     };
   }
 
