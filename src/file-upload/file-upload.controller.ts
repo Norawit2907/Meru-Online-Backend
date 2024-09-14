@@ -28,7 +28,7 @@ export class FileUploadController {
     schema: {
       type: 'object',
       properties: {
-        file: {
+        image: {
           type: 'string',
           format: 'binary',
         },
@@ -43,14 +43,14 @@ export class FileUploadController {
     return await this.fileUploadService.uploadSingle(image);
   }
 
-  @Post('many')
-  @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'image1', maxCount: 1 },
-      { name: 'image2', maxCount: 1 },
-    ]),
-  )
-  async uploadMany(@UploadedFiles() files: BufferedFile) {
-    return this.fileUploadService.uploadMany(files);
-  }
+  // @Post('many')
+  // @UseInterceptors(
+  //   FileFieldsInterceptor([
+  //     { name: 'image1', maxCount: 1 },
+  //     { name: 'image2', maxCount: 1 },
+  //   ]),
+  // )
+  // async uploadMany(@UploadedFiles() files: BufferedFile) {
+  //   return this.fileUploadService.uploadMany(files);
+  // }
 }
