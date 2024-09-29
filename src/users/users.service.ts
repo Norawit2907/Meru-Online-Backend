@@ -27,6 +27,14 @@ export class UsersService {
     return existUser ? this.toEntity(existUser) : null;
   }
 
+  async getUserByEmail(email: string): Promise<User | null> {
+    const existUser = await this.userModel.findOne({
+      email: email,
+    });
+
+    return existUser ? this.toEntity(existUser) : null;
+  }
+
   async listUsers(): Promise<User[]> {
     const allUser = await this.userModel.find({});
     return allUser.map((doc) => this.toEntity(doc));
