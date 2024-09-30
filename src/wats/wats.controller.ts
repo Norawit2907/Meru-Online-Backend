@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put, Query } from '@nestjs/common'; 
 import { User } from 'src/model/user.model';
 import { CreateWatDto } from './dto/create-wat.dto';
 import { WatsService } from './wats.service';
@@ -11,38 +11,46 @@ import { UpdateWatDto } from './dto/update-wat.dto';
 export class WatsController {
     constructor(private readonly watsService: WatsService) {}
 
-  @Post()
-  async createUser(@Body() createwatDto: CreateWatDto): Promise<Wat> {
-    return await this.watsService.createWat(createwatDto);
-  }
-
-  @Get()
-  async listWat(): Promise<Wat[]> {
-    return await this.watsService.listWats();
-  }
-
-  @Put(':id')
-  async updateUserById(
-    @Param('id') id: string,
-    @Body() updateUserDto: UpdateWatDto,
-  ): Promise<Wat> {
-    const user = await this.watsService.updateWatById(id, updateUserDto);
-    if (!user) {
-      throw new NotFoundException('User not found!');
+    @Post()
+    async createWat(@Body() createwatDto: CreateWatDto): Promise<Wat> {
+        return await this.watsService.createWat(createwatDto);
     }
-    return user;
-  }
 
-  @Delete(':id')
-  @HttpCode(204) 
-  async deleteWatById(@Param('id') id: string) {
-    const user = await this.watsService.getWatById(id);
-    if (!user) {
-      throw new NotFoundException('Wat not found!');
+    @Get()
+    async listWats(): Promise<Wat[]> {
+        return await this.watsService.listWats();
     }
-    await this.watsService.deleteWatById(id);
 
-    return { message: 'User Deleted Sucessfully' };
-  }
-  
+    @Get('search')
+    async searchWats(@Query('keyword') keyword: string): Promise<Wat[]> {
+        if (!keyword) {
+            throw new NotFoundException('Keyword is required for search');
+        }
+        return await this.watsService.searchWats(keyword);
+    }
+
+    @Put(':id')
+    async updateWatById(
+        @Param('id') id: string,
+        @Body() updateWatDto: UpdateWatDto,
+    ): Promise<Wat> {
+        const wat = await this.watsService.updateWatById(id, updateWatDto);
+        if (!wat) {
+            throw new NotFoundException('Wat not found!');
+        }
+        return wat;
+    }
+
+    @Delete(':id')
+    @HttpCode(204) 
+    async deleteWatById(@Param('id') id: string) {
+        const wat = await this.watsService.getWatById(id);
+        if (!wat) {
+            throw new NotFoundException('Wat not found!');
+        }
+        await this.watsService.deleteWatById(id);
+        return { message: 'Wat Deleted Successfully' };
+    }
+
+
 }
