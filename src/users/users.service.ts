@@ -23,7 +23,7 @@ export class UsersService {
     const existUser = await this.userModel.findOne({
       _id: new mongoose.Types.ObjectId(id),
     });
-
+    
     return existUser ? this.toEntity(existUser) : null;
   }
 

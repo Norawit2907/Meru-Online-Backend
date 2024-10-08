@@ -14,9 +14,10 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from 'src/model/user.model';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guard/auth.guard';
 
+@ApiBearerAuth('bearer')
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
@@ -32,8 +33,10 @@ export class UsersController {
     return await this.usersService.listUsers();
   }
 
+
+  // @UseGuards(AuthGuard)
   @Get(':id')
-  async getUserById(@Param() id: string): Promise<User> {
+  async getUserById(@Param('id') id: string): Promise<User> {
     const user = await this.usersService.getUserById(id);
     if (!user) {
       throw new NotFoundException('User not found!');
@@ -41,7 +44,7 @@ export class UsersController {
     return user;
   }
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Put(':id')
   async updateUserById(
     @Param('id') id: string,
