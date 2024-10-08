@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     environment:
-      MONGO_CONNECTION_STRING: mongodb://mongodb/Meru
+      MONGO_CONNECTION_STRING: mongodb://127.0.0.1:4001/Meru
     ports:
       - '4000:3000'
     networks:
@@ -21,7 +21,7 @@ services:
     container_name: mongodb-Softdev
     restart: always
     ports:
-      - '27016:27017'
+      - '4001:27017'
     volumes:
       - mongo-data:/data/db
     networks:
