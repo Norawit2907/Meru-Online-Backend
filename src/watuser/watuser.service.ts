@@ -57,11 +57,7 @@ export class WatuserService {
   toEntity(doc: WatuserDocument): Watuser {
     return {
       id: doc._id.toHexString(),
-      firstName: doc.firstname,
-      lastName: doc.lastname,
-      phoneNumber: doc.phoneNumber,
-      location: doc.location,
-      email: doc.email,
+      username: doc.firstname,
       password: doc.password,
       createdAt: doc.createdAt.toISOString(),
       updatedAt: doc.updatedAt.toISOString(),
