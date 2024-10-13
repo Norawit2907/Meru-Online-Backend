@@ -13,9 +13,18 @@ async function bootstrap() {
     .setTitle('WAT API')
     .setDescription('this is a testing API')
     .setVersion('1.0')
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      description: 'Input your JWT token',
+      name: 'Authorization',
+      in: 'header',
+    },
+    'bearer',)
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('backend/swagger/api', app, document);
+  SwaggerModule.setup(process.env.SWAGGER_PATH, app, document);
 
   await app.listen(3000);
 }
