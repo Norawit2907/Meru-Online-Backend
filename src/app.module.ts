@@ -9,6 +9,7 @@ import { FileUploadModule } from './file-upload/file-upload.module';
 import { AuthModule } from './auth/auth.module';
 import { WatsModule } from './wats/wats.module';
 import { AddonsModule } from './addons/addons.module';
+import { AddressesModule } from './address/addresses.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
@@ -19,6 +20,8 @@ import { AddonsModule } from './addons/addons.module';
     AuthModule,
     WatsModule,
     AddonsModule,
+    AddressesModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
