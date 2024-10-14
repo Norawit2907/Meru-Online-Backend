@@ -9,13 +9,16 @@ import {
   HttpCode,
   Put,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from 'src/model/user.model';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guard/auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiBearerAuth('bearer')
 @ApiTags('users')
@@ -24,7 +27,10 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+  async createUser(
+    @UploadedFile() profile_img: Express.Multer.File,
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<User> {
     return await this.usersService.createUser(createUserDto);
   }
 
@@ -33,7 +39,6 @@ export class UsersController {
   async listUser(): Promise<User[]> {
     return await this.usersService.listUsers();
   }
-
 
   @UseGuards(AuthGuard)
   @Get(':id')

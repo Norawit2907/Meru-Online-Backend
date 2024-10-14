@@ -40,7 +40,21 @@ export class MinioClientService {
     }
 
     if (!(await this.client.bucketExists(this.baseBucket))) {
-      await this.client.makeBucket(this.baseBucket, this.client.region);
+
+      const policy = {
+        Version: '2012-10-17',
+        Statement: [
+          {
+            Effect: 'Allow',
+            Principal: { AWS: '*' },
+            Action: ['s3:GetObject'],
+            Resource: [`arn:aws:s3:::${this.baseBucket}/*`],
+          },
+        ],
+      };
+      const policyString = JSON.stringify(policy);
+      await this.client.makeBucket(this.baseBucket);
+      this.client.setBucketPolicy(this.baseBucket, policyString)
     }
 
     const temp_filename = Date.now().toString();
