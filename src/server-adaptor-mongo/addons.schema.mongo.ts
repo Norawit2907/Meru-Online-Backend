@@ -3,16 +3,16 @@ import { HydratedDocument } from 'mongoose';
 
 export type AddonDocument = HydratedDocument<AddonMongo>;
 
-@Schema({ timestamps: true, collection: 'addon' })
+@Schema({ timestamps: true, collection: 'addons' })
 export class AddonMongo {
   @Prop({ required: true })
+  wat_id: string;
+  
+  @Prop({ default: Date.now })
   id: string; 
 
-  @Prop({ required: true })
-  name: string;
-
   @Prop({ default: Date.now })
-  wat_id: string;
+  name: string;
 
   @Prop({ default: Date.now })
   image: string;
