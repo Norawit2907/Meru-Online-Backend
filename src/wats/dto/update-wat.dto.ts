@@ -5,10 +5,6 @@ export class UpdateWatDto {
   
   @IsString()
   @ApiProperty()
-  id: string;
-
-  @IsString()
-  @ApiProperty()
   admin_id: string[];
 
   @IsString()

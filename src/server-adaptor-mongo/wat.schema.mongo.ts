@@ -9,9 +9,6 @@ export class WatMongo {
   name: string;
 
   @Prop({ default: Date.now })
-  id: string;
-
-  @Prop({ default: Date.now })
   admin_id: string[];
 
   @Prop({ default: Date.now })

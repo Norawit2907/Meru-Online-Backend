@@ -90,7 +90,7 @@ export class MinioClientService {
     );
 
     return {
-      url: `${this.minioEndpoint}:${this.minioPort}/${this.baseBucket}/${filename}`,
+      url: `http://${this.minioEndpoint}:${this.minioPort}/${this.baseBucket}/${filename}`,
     };
   }
 
