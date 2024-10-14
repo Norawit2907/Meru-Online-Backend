@@ -8,7 +8,7 @@ import { MinioClientModule } from './minio-client/minio-client.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { AuthModule } from './auth/auth.module';
 import { WatsModule } from './wats/wats.module';
-
+import { AddonsModule } from './addons/addons.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
@@ -18,6 +18,7 @@ import { WatsModule } from './wats/wats.module';
     FileUploadModule,
     AuthModule,
     WatsModule,
+    AddonsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
