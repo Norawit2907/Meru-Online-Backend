@@ -30,7 +30,7 @@ import {
     cremation_date: string;
   
     @IsNotEmpty()
-    @ApiProperty({ example: '3 hours', description: 'Duration of the reservation' })
+    @ApiProperty({ example: '3', description: 'Duration of the reservation' })
     duration: string;
   
     @IsNotEmpty()

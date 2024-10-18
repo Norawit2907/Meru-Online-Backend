@@ -1,11 +1,11 @@
 import { 
-    Controller, Get, Post, Put, Delete, Param, Body, ParseIntPipe 
+    Controller, Get, Post, Put, Delete, Param, Body 
   } from '@nestjs/common';
   import { ReservesDto } from './dto/reserves.dto';
   import { ReservesService } from './reserves.service';
   import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
   
-  @ApiTags('Reserves')
+  @ApiTags('reserves')
   @Controller('reserves')
   export class ReservesController {
     constructor(private readonly reservesService: ReservesService) {}
@@ -19,10 +19,10 @@ import {
   
     @Get(':id')
     @ApiOperation({ summary: 'Retrieve a reserve by ID' })
-    @ApiParam({ name: 'id', example: '1', description: 'ID of the reserve' })
+    @ApiParam({ name: 'id', example: '6521d8e7abf8f1234567890', description: 'ID of the reserve' })
     @ApiResponse({ status: 200, description: 'Reserve found' })
     @ApiResponse({ status: 404, description: 'Reserve not found' })
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id') id: string) {
       return this.reservesService.findOne(id);
     }
   
@@ -36,11 +36,11 @@ import {
   
     @Put(':id')
     @ApiOperation({ summary: 'Update a reserve by ID' })
-    @ApiParam({ name: 'id', example: '1', description: 'ID of the reserve to update' })
+    @ApiParam({ name: 'id', example: '6521d8e7abf8f1234567890', description: 'ID of the reserve to update' })
     @ApiResponse({ status: 200, description: 'Reserve successfully updated' })
     @ApiResponse({ status: 404, description: 'Reserve not found' })
     update(
-      @Param('id', ParseIntPipe) id: number,
+      @Param('id') id: string,
       @Body() updateReserveDto: Partial<ReservesDto>,
     ) {
       return this.reservesService.update(id, updateReserveDto);
@@ -48,10 +48,10 @@ import {
   
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a reserve by ID' })
-    @ApiParam({ name: 'id', example: '1', description: 'ID of the reserve to delete' })
+    @ApiParam({ name: 'id', example: '6521d8e7abf8f1234567890', description: 'ID of the reserve to delete' })
     @ApiResponse({ status: 200, description: 'Reserve successfully deleted' })
     @ApiResponse({ status: 404, description: 'Reserve not found' })
-    delete(@Param('id', ParseIntPipe) id: number) {
+    delete(@Param('id') id: string) {
       return this.reservesService.delete(id);
     }
   }
