@@ -18,6 +18,10 @@ export class CreateWatDto {
   @ApiProperty()
   max_cost: number;
 
+  @IsNumber()
+  @ApiProperty()
+  max_workload: number;
+
   @IsString()
   @ApiProperty()
   description: string;
