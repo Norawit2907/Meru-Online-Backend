@@ -4,7 +4,7 @@ export type UserBody = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  location: string;
+  profile_img: string;
   email: string;
   password: string;
 };
