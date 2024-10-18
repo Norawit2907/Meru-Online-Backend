@@ -29,12 +29,10 @@ export class ReservesService {
         const reservationDate = new Date(createReserveDto.reservation_date);
         const cremationDate = new Date(createReserveDto.cremation_date);
         const durationDays = Number(createReserveDto.duration);
-
         
         const endDate = new Date(reservationDate);
         endDate.setDate(reservationDate.getDate() + durationDays);
 
-       
         const existingReservations = await this.reservesModel.find({
             wat_id: createReserveDto.wat_id,
             reservation_date: { 
@@ -42,11 +40,17 @@ export class ReservesService {
                 $lt: endDate.toISOString().split('T')[0],
             },
         });
+        const existingCremations = await this.reservesModel.find({
+            wat_id: createReserveDto.wat_id,
+            cremation_date : createReserveDto.cremation_date
+        })
+
+        // console.log(existingCremations);
         // console.log(endDate.toISOString().split('T')[0] < cremationDate.toISOString().split('T')[0]);
         if (existingReservations.length > 0) {
             throw new ConflictException('A reservation with the same wat_id and overlapping dates already exists.');
         }
-        if(endDate.toISOString().split('T')[0] < cremationDate.toISOString().split('T')[0]){
+        if(existingCremations.length > 2){
             throw new ConflictException('A cremationDate is beyond endDate.');
         }
     const newReserve = new this.reservesModel(createReserveDto);
