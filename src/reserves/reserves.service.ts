@@ -54,19 +54,19 @@ export class ReservesService {
   }
 
   
-//   async update(
-//     id: string,
-//     updateReserveDto: Partial<ReservesDto>,
-//   ): Promise<ReservesMongo> {
-//     const updatedReserve = await this.reservesModel
-//       .findByIdAndUpdate(id, updateReserveDto, { new: true })
-//       .exec();
+  async update(
+    id: string,
+    updateReserveDto: Partial<ReservesDto>,
+  ): Promise<ReservesMongo> {
+    const updatedReserve = await this.reservesModel
+      .findByIdAndUpdate(id, updateReserveDto, { new: true })
+      .exec();
 
-//     if (!updatedReserve) {
-//       throw new NotFoundException(`Reserve with ID ${id} not found`);
-//     }
-//     return updatedReserve;
-//   }
+    if (!updatedReserve) {
+      throw new NotFoundException(`Reserve with ID ${id} not found`);
+    }
+    return updatedReserve;
+  }
 
   
   async delete(id: string): Promise<{ message: string }> {
