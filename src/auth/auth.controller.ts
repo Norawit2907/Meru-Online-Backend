@@ -14,7 +14,6 @@ export class AuthController {
     return this.authService.userSignIn(body.email, body.password);
   }
 
-  
   @Post('user/register')
   UserRegister(
     @Body() body: CreateUserDto) {
@@ -25,4 +24,11 @@ export class AuthController {
   WatSignIn(@Body() body: signInDto){
     return this.authService.watSignIn(body.email, body.password)
   }
+
+  @Post('wat/register')
+  WatRegister(
+    @Body() body: signInDto) {
+    return this.authService.watRegister(body.email, body.password);
+  }
+
 }

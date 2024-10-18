@@ -5,17 +5,6 @@ export type WatuserDocument = HydratedDocument<WatuserMongo>;
 
 @Schema({ timestamps: true, collection: 'watuser' })
 export class WatuserMongo {
-  @Prop({ required: true })
-  firstname: string;
-
-  @Prop({ required: true })
-  lastname: string;
-
-  @Prop({ required: true })
-  phoneNumber: string;
-
-  @Prop({ required: true })
-  location: string;
 
   @Prop({ required: true })
   email: string;

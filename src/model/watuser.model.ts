@@ -1,7 +1,7 @@
 import { dbMeta } from './common.model';
 
 export type WatuserBody = {
-  username: string;
+  email: string;
   password: string;
 };
 

@@ -15,5 +15,6 @@ import {
   ],
   controllers: [WatuserController],
   providers: [WatuserService],
+  exports: [WatuserService]
 })
 export class WatuserModule {}

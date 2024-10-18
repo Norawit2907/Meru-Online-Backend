@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateWatuserDto {
-  @IsString()
+  @IsEmail()
+  @IsNotEmpty()
   @ApiProperty()
-  username: string;
+  email: string;
 
   @IsNotEmpty()
   @ApiProperty()

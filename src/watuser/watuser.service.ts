@@ -34,6 +34,14 @@ export class WatuserService {
     return allWatuser.map((doc) => this.toEntity(doc));
   }
 
+  async getUserByEmail(email: string): Promise<Watuser | null> {
+    const existWatUser = await this.watuserModel.findOne({
+      email: email,
+    });
+
+    return existWatUser ? this.toEntity(existWatUser) : null;
+  }
+
   async updateWatuserById(
     id: string,
     updateWatuserDto: UpdateWatuserDto,
@@ -57,7 +65,7 @@ export class WatuserService {
   toEntity(doc: WatuserDocument): Watuser {
     return {
       id: doc._id.toHexString(),
-      username: doc.firstname,
+      email: doc.email,
       password: doc.password,
       createdAt: doc.createdAt.toISOString(),
       updatedAt: doc.updatedAt.toISOString(),
