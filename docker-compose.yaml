@@ -11,14 +11,14 @@ services:
       - '4000:3000'
     networks:
       - backend
-      - tunnel
+      # - tunnel
     depends_on:
       - database
 
   # start the mongodb service as container
   database:
     image: mongo:4.4
-    container_name: mongodb
+    container_name: mongodb-Softdev
     restart: always
     ports:
       - '27016:27017'
@@ -26,11 +26,26 @@ services:
       - mongo-data:/data/db
     networks:
       - backend
+  
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "7000:9000"
+      - "7001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: miniopassword
+    volumes:
+      - minio-data:/data/object
+    command: server --address ":9001" --console-address ":9000" /data
+    restart: always
+    
 
 networks:
   backend:
-  tunnel:
-    external: true
+  # tunnel:
+  #   external: true
 
 volumes:
   mongo-data:
+  minio-data:
