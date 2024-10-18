@@ -11,7 +11,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(email: string, password: string) {
+  async userSignIn(email: string, password: string) {
     const user = await this.usersService.getUserByEmail(email);
     if (!user) {
       throw new UnauthorizedException();
@@ -30,7 +30,7 @@ export class AuthService {
     };
   }
 
-  async register(body: CreateUserDto) {
+  async userRegister(body: CreateUserDto) {
     const userexist = await this.usersService.getUserByEmail(body.email)
       if(userexist){
         throw new ForbiddenException("Email already taken")
@@ -45,5 +45,9 @@ export class AuthService {
       user_img: newUser.profile_img,
       access_token: await this.jwtService.signAsync(payload)
     }
+  }
+
+  async watSignIn(email: string, password: string){
+    
   }
 }
