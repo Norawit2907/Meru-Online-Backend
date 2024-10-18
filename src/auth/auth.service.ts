@@ -23,6 +23,9 @@ export class AuthService {
       sub: user.id,
     };
     return {
+      sub: user.id,
+      username: user.firstName + ' ' + user.lastName,
+      user_img: user.profile_img,
       access_token: await this.jwtService.signAsync(payload),
     };
   }
@@ -37,6 +40,9 @@ export class AuthService {
       sub: newUser.id,
     }
     return {
+      sub: newUser.id,
+      username: newUser.firstName + ' ' + newUser.lastName,
+      user_img: newUser.profile_img,
       access_token: await this.jwtService.signAsync(payload)
     }
   }
