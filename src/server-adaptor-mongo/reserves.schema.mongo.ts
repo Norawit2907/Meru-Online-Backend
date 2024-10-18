@@ -5,9 +5,6 @@ export type ReservesDocument = HydratedDocument<ReservesMongo>;
 
 @Schema({ timestamps: true, collection: 'reserves' })
 export class ReservesMongo {
-  @Prop({ required: true })
-  id: string;
-  
   @Prop({ default: Date.now })
   wat_id: string; 
 

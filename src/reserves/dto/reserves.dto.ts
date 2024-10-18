@@ -9,16 +9,16 @@ import {
   
   export class ReservesDto {
     @IsString()
-    @ApiProperty({ example: '1', description: 'Unique identifier of the reserve' })
-    id: string;
-  
-    @IsString()
     @ApiProperty({ example: 'WAT-123', description: 'Wat (temple) identifier' })
     wat_id: string;
   
     @IsString()
     @ApiProperty({ example: 'USER-456', description: 'User identifier who made the reservation' })
     user_id: string;
+
+    @IsString()
+    @ApiProperty({ example: 'wat', description: 'User identifier who made the reservation' })
+    sender: string;
   
     @IsDateString()
     @ApiProperty({ example: '2024-10-18', description: 'Date of reservation in ISO format' })
