@@ -2,6 +2,8 @@ import {
     Controller, Get, Post, Put, Delete, Param, Body 
   } from '@nestjs/common';
   import { ReservesDto } from './dto/reserves.dto';
+  import { CreateWatDto } from 'src/wats/dto/create-wat.dto';
+  import { UpdateReservesDto } from './dto/update-reserves.dto';
   import { ReservesService } from './reserves.service';
   import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
   
@@ -41,7 +43,7 @@ import {
     @ApiResponse({ status: 404, description: 'Reserve not found' })
     update(
       @Param('id') id: string,
-      @Body() updateReserveDto: Partial<ReservesDto>,
+      @Body() updateReserveDto: UpdateReservesDto,
     ) {
       return this.reservesService.update(id, updateReserveDto);
     }
