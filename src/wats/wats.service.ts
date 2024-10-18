@@ -16,6 +16,7 @@ export class WatsService {
         newWat.save();
         return this.toEntity(newWat);
       }
+
     async getWatById(id: string): Promise<Wat | null> {
        const existUser = await this.watModel.findOne({
        _id: new mongoose.Types.ObjectId(id),
@@ -67,6 +68,7 @@ export class WatsService {
       name: doc.name,
       min_cost: doc.min_cost,
       max_cost: doc.max_cost,
+      max_workload: doc.max_workload,
       description: doc.description,
       location: doc.location,
       picture: doc.picture,

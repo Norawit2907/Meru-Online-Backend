@@ -14,8 +14,8 @@ export class UserMongo {
   @Prop({ required: true })
   phoneNumber: string;
 
-  @Prop({ required: true })
-  location: string;
+  @Prop({ required: true})
+  profile_img: string;
 
   @Prop({ required: true })
   email: string;

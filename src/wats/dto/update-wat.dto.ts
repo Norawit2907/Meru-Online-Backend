@@ -5,10 +5,6 @@ export class UpdateWatDto {
   
   @IsString()
   @ApiProperty()
-  id: string;
-
-  @IsString()
-  @ApiProperty()
   admin_id: string[];
 
   @IsString()
@@ -22,6 +18,10 @@ export class UpdateWatDto {
   @IsNumber()
   @ApiProperty()
   max_cost: number;
+
+  @IsNumber()
+  @ApiProperty()
+  max_workload: number;
 
   @IsString()
   @ApiProperty()

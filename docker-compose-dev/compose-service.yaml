@@ -3,7 +3,7 @@ services:
     image: mongo
     restart: unless-stopped
     ports:
-      - 3001:27017
+      - 3002:27017
     volumes:
       - mongo-data:/data/db
 

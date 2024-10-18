@@ -66,7 +66,7 @@ export class UsersService {
       firstName: doc.firstname,
       lastName: doc.lastname,
       phoneNumber: doc.phoneNumber,
-      location: doc.location,
+      profile_img: doc.profile_img,
       email: doc.email,
       password: doc.password,
       createdAt: doc.createdAt.toISOString(),

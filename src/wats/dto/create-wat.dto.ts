@@ -2,9 +2,6 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateWatDto {
-  @IsString()
-  @ApiProperty()
-  id: string;
 
   @ApiProperty()
   admin_id: string[];
@@ -20,6 +17,10 @@ export class CreateWatDto {
   @IsNumber()
   @ApiProperty()
   max_cost: number;
+
+  @IsNumber()
+  @ApiProperty()
+  max_workload: number;
 
   @IsString()
   @ApiProperty()
