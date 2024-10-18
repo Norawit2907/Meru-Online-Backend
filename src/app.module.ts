@@ -7,7 +7,9 @@ import { ConfigModule } from '@nestjs/config';
 import { MinioClientModule } from './minio-client/minio-client.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { AuthModule } from './auth/auth.module';
-
+import { WatsModule } from './wats/wats.module';
+import { AddonsModule } from './addons/addons.module';
+import { AddressesModule } from './address/addresses.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
@@ -16,6 +18,10 @@ import { AuthModule } from './auth/auth.module';
     MinioClientModule,
     FileUploadModule,
     AuthModule,
+    WatsModule,
+    AddonsModule,
+    AddressesModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],

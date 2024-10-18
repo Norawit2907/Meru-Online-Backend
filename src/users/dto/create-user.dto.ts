@@ -10,13 +10,14 @@ export class CreateUserDto {
   @ApiProperty()
   lastname: string;
 
-  @IsString()
-  @ApiProperty()
-  location: string;
-
+  
   @IsString()
   @ApiProperty()
   phoneNumber: string;
+  
+  @IsString()
+  @ApiProperty()
+  profile_img: string;
 
   @IsEmail()
   @ApiProperty()
