@@ -9,10 +9,6 @@ import {
   
   export class ReservesDto {
     @IsString()
-    @ApiProperty({ example: '1', description: 'Unique identifier of the reserve' })
-    id: string;
-  
-    @IsString()
     @ApiProperty({ example: 'WAT-123', description: 'Wat (temple) identifier' })
     wat_id: string;
   
