@@ -7,6 +7,7 @@ export type WatBody = {
     max_cost: number;
     description: string;
     location: string;
+    max_workload: number
     picture: string[];
 };
 

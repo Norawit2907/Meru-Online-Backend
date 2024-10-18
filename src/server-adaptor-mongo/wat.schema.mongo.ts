@@ -8,23 +8,26 @@ export class WatMongo {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   admin_id: string[];
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   min_cost: number;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   max_cost: number;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   description: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   location: string;
 
-  @Prop({ default: Date.now })
+  @Prop({})
   picture: string[];
+
+  @Prop({ required: true })
+  max_workload: number;
 
   @Prop({ default: Date.now })
   createdAt: Date;

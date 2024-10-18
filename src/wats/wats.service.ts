@@ -68,6 +68,7 @@ export class WatsService {
       name: doc.name,
       min_cost: doc.min_cost,
       max_cost: doc.max_cost,
+      max_workload: doc.max_workload,
       description: doc.description,
       location: doc.location,
       picture: doc.picture,
