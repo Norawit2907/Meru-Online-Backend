@@ -13,23 +13,11 @@ export class UpdateWatDto {
 
   @IsNumber()
   @ApiProperty()
-  min_cost: number;
-
-  @IsNumber()
-  @ApiProperty()
-  max_cost: number;
-
-  @IsNumber()
-  @ApiProperty()
   max_workload: number;
 
   @IsString()
   @ApiProperty()
   description: string;
-
-  @IsString()
-  @ApiProperty()
-  location: string;
 
   @IsString()
   @ApiProperty()
