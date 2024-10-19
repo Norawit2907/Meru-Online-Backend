@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { WatuserModule } from './watuser/watuser.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { MinioClientModule } from './minio-client/minio-client.module';
@@ -16,6 +17,7 @@ import { ReservesModule } from './reserves/reserves.module';
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
     MongooseModule.forRoot(process.env.MONGO_CONNECTION_STRING),
     UsersModule,
+    WatuserModule,
     MinioClientModule,
     FileUploadModule,
     AuthModule,

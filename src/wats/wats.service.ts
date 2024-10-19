@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { max, min } from 'class-validator';
 import mongoose, { Model } from 'mongoose';
@@ -24,6 +24,17 @@ export class WatsService {
     
         return existUser ? this.toEntity(existUser) : null;
       }
+
+    async getWatByAdminId(id: string){
+      const existWat = await this.watModel.findOne({
+        admin_id: id
+      })
+      if(!existWat){
+        throw new NotFoundException("Wat not found!!")
+      }
+
+      return existWat ? this.toEntity(existWat) : null;
+    }
 
     async updateWatById(
         id: string,
@@ -57,7 +68,7 @@ export class WatsService {
             { description: { $regex: regex } },   
             { location: { $regex: regex } }    
           ]
-        }).exec();  
+        }).exec();
         return results.map((doc) => this.toEntity(doc));
       }
     
@@ -65,6 +76,10 @@ export class WatsService {
     return {
       id: doc._id.toHexString(),
       admin_id: doc.admin_id,
+      admin_name: doc.admin_name,
+      phoneNumber: doc.phoneNumber,
+      line_ID: doc.line_ID,
+      Facebook: doc.Facebook,
       name: doc.name,
       min_cost: doc.min_cost,
       max_cost: doc.max_cost,

@@ -9,7 +9,8 @@ import { WatMongo, WatSchema } from 'src/server-adaptor-mongo/wat.schema.mongo';
     MongooseModule.forFeature([{ name: WatMongo.name, schema: WatSchema }]),
   ],
   controllers: [WatsController],
-  providers: [WatsService]
+  providers: [WatsService],
+  exports: [WatsService]
 })
 
 export class WatsModule {}

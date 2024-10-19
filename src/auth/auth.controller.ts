@@ -9,15 +9,26 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('login')
-  signIn(@Body() body: signInDto) {
-    return this.authService.signIn(body.email, body.password);
+  @Post('user/login')
+  UserSignIn(@Body() body: signInDto) {
+    return this.authService.userSignIn(body.email, body.password);
   }
 
-  
-  @Post('register')
-  register(
+  @Post('user/register')
+  UserRegister(
     @Body() body: CreateUserDto) {
-    return this.authService.register(body);
+    return this.authService.userRegister(body);
   }
+
+  @Post('wat/login')
+  WatSignIn(@Body() body: signInDto){
+    return this.authService.watSignIn(body.email, body.password)
+  }
+
+  @Post('wat/register')
+  WatRegister(
+    @Body() body: signInDto) {
+    return this.authService.watRegister(body.email, body.password);
+  }
+
 }
