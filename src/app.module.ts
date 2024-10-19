@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { WatsModule } from './wats/wats.module';
 import { AddonsModule } from './addons/addons.module';
 import { AddressesModule } from './address/addresses.module';
+import { NotificationModule } from './notification/notification.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
@@ -21,6 +22,7 @@ import { AddressesModule } from './address/addresses.module';
     WatsModule,
     AddonsModule,
     AddressesModule,
+    NotificationModule,
 
   ],
   controllers: [AppController],
