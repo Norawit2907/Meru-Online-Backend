@@ -12,6 +12,7 @@ import { WatsModule } from './wats/wats.module';
 import { AddonsModule } from './addons/addons.module';
 import { AddressesModule } from './address/addresses.module';
 import { ReservesModule } from './reserves/reserves.module';
+import { NotificationModule } from './notification/notification.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
@@ -25,6 +26,7 @@ import { ReservesModule } from './reserves/reserves.module';
     AddonsModule,
     AddressesModule,
     ReservesModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
