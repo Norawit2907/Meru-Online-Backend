@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateWatDto {
 
   @ApiProperty()
-  admin_id: string[];
+  admin_id: string;
 
   @IsString()
   @ApiProperty()

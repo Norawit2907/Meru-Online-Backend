@@ -9,7 +9,8 @@ import { AddressMongo, AddressSchema } from 'src/server-adaptor-mongo/address.sc
     MongooseModule.forFeature([{ name: AddressMongo.name, schema:AddressSchema }]),
   ],
   controllers: [AddressesController],
-  providers: [AddressesService]
+  providers: [AddressesService],
+  exports: [AddressesService]
 })
 
 export class AddressesModule {}

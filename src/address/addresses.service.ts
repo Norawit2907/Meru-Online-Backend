@@ -25,6 +25,13 @@ export class AddressesService {
         return existUser ? this.toEntity(existUser) : null;
       }
 
+    async getAddressByWatId(id: string): Promise<Address | null>{
+      const existAddress = await this.addressModel.findOne({
+        wat_id: id
+      });
+      return existAddress ? this.toEntity(existAddress) : null
+    }
+
     async updateAddressById(
         id: string,
         updateaddressDto: UpdateAddressDto,

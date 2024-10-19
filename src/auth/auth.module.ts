@@ -6,11 +6,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from 'src/users/users.module';
 import { WatuserModule } from 'src/watuser/watuser.module';
+import { WatsModule } from 'src/wats/wats.module';
+import { AddressesModule } from 'src/address/addresses.module';
 
 @Module({
   imports: [
     UsersModule,
     WatuserModule,
+    WatsModule,
+    AddressesModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
