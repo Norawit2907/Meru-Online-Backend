@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { NotificationStatus } from 'src/server-adaptor-mongo/notification.schema.mongo';
 
 export class UpdateNotificationDto {
   @IsString()
@@ -11,7 +10,8 @@ export class UpdateNotificationDto {
   @ApiProperty()
   desription: string;
 
-  @IsEnum(NotificationStatus)
+  @IsString()
   @ApiProperty()
-  status: NotificationStatus;
+  owner_id: string;
+
 }

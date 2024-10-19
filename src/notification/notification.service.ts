@@ -5,7 +5,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import {
   NotificationMongo,
   NotificationDocument,
-  NotificationStatus,
 } from 'src/server-adaptor-mongo/notification.schema.mongo';
 import mongoose, { Model } from 'mongoose';
 import { Notification } from 'src/model/notification.model';
@@ -58,7 +57,7 @@ export class NotificationService {
       id: doc._id.toHexString(),
       title: doc.title,
       description: doc.description,
-      status: doc.status,
+      owner_id: doc.owner_id,
       createdAt: doc.createdAt.toISOString(),
       updatedAt: doc.updatedAt.toISOString(),
     };

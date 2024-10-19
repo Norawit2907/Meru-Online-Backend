@@ -23,7 +23,6 @@ import { NotificationModule } from './notification/notification.module';
     AddonsModule,
     AddressesModule,
     NotificationModule,
-
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,13 +3,6 @@ import { HydratedDocument } from 'mongoose';
 
 export type NotificationDocument = HydratedDocument<NotificationMongo>;
 
-export enum NotificationStatus {
-  PENDING = "รอยืนยัน",
-  ACCEPT = "กำลังมาถึง",
-  PASSED = "ผ่านมาแล้ว",
-  REJECTED = "ปฏิเสธแล้ว",
-}
-
 @Schema({ timestamps: true, collection: 'notification' })
 export class NotificationMongo {
   @Prop({ required: true })
@@ -18,14 +11,8 @@ export class NotificationMongo {
   @Prop({ required: true })
   description: string;
 
-  @Prop({ default: NotificationStatus.PENDING })
-  status: NotificationStatus;
-  
   @Prop({ required: true })
-  sender: string;
-
-  @Prop({ required: true })
-  received: string;
+  owner_id: string;
 
   @Prop({ default: Date.now })
   createdAt: Date;

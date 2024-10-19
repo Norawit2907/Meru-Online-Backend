@@ -5,7 +5,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
     NotificationMongo,
     NotificationSchema,
-    NotificationStatus,
 } from '../server-adaptor-mongo/notification.schema.mongo';
 import { JwtModule } from '@nestjs/jwt';
 

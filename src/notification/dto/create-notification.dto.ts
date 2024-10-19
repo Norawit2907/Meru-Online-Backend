@@ -1,6 +1,5 @@
 import { IsEnum,  IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { NotificationStatus } from 'src/server-adaptor-mongo/notification.schema.mongo';
 
 export class CreateNotificationDto {
   @IsString()
@@ -11,7 +10,8 @@ export class CreateNotificationDto {
   @ApiProperty()
   description: string;
 
-  @IsEnum(NotificationStatus)
+  @IsString()
   @ApiProperty()
-  status: NotificationStatus = NotificationStatus.PENDING;
+  owner_id: string;
+
 }
