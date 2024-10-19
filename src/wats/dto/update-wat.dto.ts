@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class UpdateWatDto {
   
   @IsString()
   @ApiProperty()
-  admin_id: string[];
+  admin_id: string;
 
   @IsString()
   @ApiProperty()
@@ -13,21 +13,13 @@ export class UpdateWatDto {
 
   @IsNumber()
   @ApiProperty()
-  min_cost: number;
-
-  @IsNumber()
-  @ApiProperty()
-  max_cost: number;
+  max_workload: number;
 
   @IsString()
   @ApiProperty()
   description: string;
 
-  @IsString()
-  @ApiProperty()
-  location: string;
-
-  @IsString()
+  @IsArray()
   @ApiProperty()
   picture: string[];
 }

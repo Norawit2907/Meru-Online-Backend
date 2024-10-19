@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateWatDto {
 
   @ApiProperty()
-  admin_id: string[];
+  admin_id: string;
 
   @IsString()
   @ApiProperty()
@@ -17,6 +17,10 @@ export class CreateWatDto {
   @IsNumber()
   @ApiProperty()
   max_cost: number;
+
+  @IsNumber()
+  @ApiProperty()
+  max_workload: number;
 
   @IsString()
   @ApiProperty()
