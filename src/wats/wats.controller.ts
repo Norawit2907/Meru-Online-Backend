@@ -21,6 +21,15 @@ export class WatsController {
         return await this.watsService.listWats();
     }
 
+    @Get(':id')
+    async getWatsById(@Param('id') id: string): Promise<Wat> {
+        const wat = await this.watsService.getWatById(id);
+        if (!wat) {
+          throw new NotFoundException('Wat not found!');
+        }
+        return wat;
+      }
+    
     @Get('search')
     async searchWats(@Query('keyword') keyword: string): Promise<Wat[]> {
         if (!keyword) {
