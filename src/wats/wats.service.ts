@@ -68,7 +68,7 @@ export class WatsService {
             { description: { $regex: regex } },   
             { location: { $regex: regex } }    
           ]
-        }).exec();  
+        }).exec();
         return results.map((doc) => this.toEntity(doc));
       }
     
