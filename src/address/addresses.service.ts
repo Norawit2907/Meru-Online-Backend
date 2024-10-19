@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { max, min } from 'class-validator';
 import mongoose, { Model } from 'mongoose';
@@ -30,6 +30,21 @@ export class AddressesService {
         wat_id: id
       });
       return existAddress ? this.toEntity(existAddress) : null
+    }
+
+    async updateAddressByWatId(wat_id: string, updateAddressDto: UpdateAddressDto): Promise<Address | null> {
+      const existAddress = await this.getAddressByWatId(wat_id);
+      if(!existAddress){
+        throw new NotFoundException("Address not found")
+      }
+      const updatedAddress = await this.addressModel.findOneAndUpdate(
+        {
+          _id: new mongoose.Types.ObjectId(existAddress.id)
+        },
+        updateAddressDto,
+        {new: true},
+      )
+      return updatedAddress ? this.toEntity(updatedAddress) : null
     }
 
     async updateAddressById(

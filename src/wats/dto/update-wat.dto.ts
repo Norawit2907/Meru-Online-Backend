@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class UpdateWatDto {
   
@@ -19,7 +19,7 @@ export class UpdateWatDto {
   @ApiProperty()
   description: string;
 
-  @IsString()
+  @IsArray()
   @ApiProperty()
   picture: string[];
 }
