@@ -33,9 +33,13 @@ export class ReservesService {
     const reservationDate = new Date(createReserveDto.reservation_date);
     const durationDays = Number(createReserveDto.duration);
     const endDate = new Date(reservationDate);
+    const nowDate = new Date();
     const sender = createReserveDto.sender;
     let owner_noti_id = createReserveDto.user_id
     // const noti_describtion = {};
+    if (reservationDate < nowDate) {
+      throw new ConflictException("Reservation date cannot be in the past.");
+    }
 
     if (sender === 'user') {
       owner_noti_id = createReserveDto.wat_id;
@@ -52,6 +56,8 @@ export class ReservesService {
         $lt: endDate.toISOString().split('T')[0],
       },
     });
+
+    // console.log(nowDate == reservationDate);
 
     const existingCremations = await this.reservesModel.find({
       wat_id: createReserveDto.wat_id,
