@@ -34,7 +34,7 @@ export class UsersController {
     return await this.usersService.createUser(createUserDto);
   }
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get()
   async listUser(): Promise<User[]> {
     return await this.usersService.listUsers();

@@ -16,7 +16,7 @@ export class ReservesService {
 
 
   async findAll(): Promise<ReservesMongo[]> {
-    return this.reservesModel.find().exec(); // Use .exec() to return a Promise
+    return this.reservesModel.find().exec();
   }
 
 
