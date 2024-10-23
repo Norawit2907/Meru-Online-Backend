@@ -34,6 +34,13 @@ export class AddressesController {
     return await this.addressesService.listAddresses();
   }
 
+  @Get('/wat/:id')
+  async getAddressByWatId(
+    @Param('id') id: string
+  ): Promise<Address>{
+    return await this.addressesService.getAddressByWatId(id);
+  }
+
   @Put('/wat/:id')
   async updateAddressByWatId(
     @Param('id') id: string,
