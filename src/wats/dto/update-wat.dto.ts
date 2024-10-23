@@ -3,13 +3,35 @@ import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validato
 
 export class UpdateWatDto {
   
-  @IsString()
   @ApiProperty()
   admin_id: string;
+
+  @ApiProperty()
+  admin_name: string;
 
   @IsString()
   @ApiProperty()
   name: string;
+
+  @IsString()
+  @ApiProperty()
+  phoneNumber: string;
+
+  @IsString()
+  @ApiProperty()
+  line_ID: string;
+
+  @IsString()
+  @ApiProperty()
+  Facebook: string;
+
+  @IsNumber()
+  @ApiProperty()
+  min_cost: number;
+
+  @IsNumber()
+  @ApiProperty()
+  max_cost: number;
 
   @IsNumber()
   @ApiProperty()
@@ -19,7 +41,10 @@ export class UpdateWatDto {
   @ApiProperty()
   description: string;
 
-  @IsArray()
+  @IsString()
+  @ApiProperty()
+  location: string;
+
   @ApiProperty()
   picture: string[];
 }

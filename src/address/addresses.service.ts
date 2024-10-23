@@ -49,6 +49,7 @@ export class AddressesService {
     if (!existAddress) {
       throw new NotFoundException("Address not found")
     }
+    
     const updatedAddress = await this.addressModel.findOneAndUpdate(
       {
         _id: new mongoose.Types.ObjectId(existAddress.id)
@@ -63,6 +64,7 @@ export class AddressesService {
     id: string,
     updateaddressDto: UpdateAddressDto,
   ): Promise<Address | null> {
+    
     const updatedUser = await this.addressModel.findOneAndUpdate(
       {
         _id: new mongoose.Types.ObjectId(id),
@@ -92,8 +94,8 @@ export class AddressesService {
       street: doc.street,
       alley: doc.alley,
       province: doc.province,
-      disctrinct: doc.disctrinct,
-      sub_disctrinct: doc.sub_disctrinct,
+      distrinct: doc.distrinct,
+      sub_distrinct: doc.sub_distrinct,
       postalCode: doc.postalCode,
       latitude: doc.latitude,
       longtitude: doc.longtitude,

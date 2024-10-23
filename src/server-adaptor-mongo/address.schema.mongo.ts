@@ -8,31 +8,31 @@ export class AddressMongo {
   @Prop({ required: true })
   wat_id: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   address: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   street: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   alley: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   province: string;
 
-  @Prop({ default: Date.now })
-  disctrinct: string;
+  @Prop({ required: true })
+  distrinct: string;
 
-  @Prop({ default: Date.now })
-  sub_disctrinct: string;
+  @Prop({ required: true })
+  sub_distrinct: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   postalCode: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   latitude: string;
 
-  @Prop({ default: Date.now })
+  @Prop({ required: true })
   longtitude: string;
 
   @Prop({ default: Date.now })

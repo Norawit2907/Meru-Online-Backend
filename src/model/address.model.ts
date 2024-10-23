@@ -6,8 +6,8 @@ export type AddressBody = {
     street: string;
     alley: string;
     province: string;
-    disctrinct: string;
-    sub_disctrinct: string;
+    distrinct: string;
+    sub_distrinct: string;
     postalCode: string;
     latitude: string;
     longtitude: string;

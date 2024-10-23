@@ -46,6 +46,7 @@ export class AddressesController {
     @Param('id') id: string,
     @Body() updateAddressDto: UpdateAddressDto,
   ): Promise<Address> {
+    
     const Address = await this.addressesService.updateAddressByWatId(
         id,
         updateAddressDto
