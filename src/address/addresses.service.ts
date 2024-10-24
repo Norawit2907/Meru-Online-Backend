@@ -16,6 +16,10 @@ export class AddressesService {
 
   async createAddress(createaddressDto: CreateAddressDto): Promise<Address> {
 
+    // if(this.getAddressByWatId(createaddressDto.wat_id)){
+    //   throw new NotFoundException("Address already exist")
+    // }
+
     const address_lat_lng = await this.geocodingService.getCoordinates(createaddressDto.address);
 
     const newAddress = new this.addressModel(
@@ -46,6 +50,7 @@ export class AddressesService {
 
   async updateAddressByWatId(wat_id: string, updateAddressDto: UpdateAddressDto): Promise<Address | null> {
     const existAddress = await this.getAddressByWatId(wat_id);
+    const address_lat_lng = await this.geocodingService.getCoordinates(updateAddressDto.address);
     if (!existAddress) {
       throw new NotFoundException("Address not found")
     }
@@ -55,6 +60,7 @@ export class AddressesService {
         _id: new mongoose.Types.ObjectId(existAddress.id)
       },
       updateAddressDto,
+      
       { new: true },
     )
     return updatedAddress ? this.toEntity(updatedAddress) : null
