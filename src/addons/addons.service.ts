@@ -21,6 +21,11 @@ export class AddonsService {
         return existAddon ? this.toEntity(existAddon) : null;
     }
 
+    async getAddonByWatId(wat_id: string): Promise<Addon[] | null> {
+        const existAddons = await this.addonModel.find({ wat_id: new mongoose.Types.ObjectId(wat_id) });
+        return existAddons.length > 0 ? existAddons.map(addon => this.toEntity(addon)) : null;
+    }
+
     async updateAddonById(id: string, updateaddonDto: UpdateAddonDto): Promise<Addon | null> {
         const updatedAddon = await this.addonModel.findOneAndUpdate(
             { _id: new mongoose.Types.ObjectId(id) },

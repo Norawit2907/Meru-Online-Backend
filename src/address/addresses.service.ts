@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { max, min } from 'class-validator';
 import mongoose, { Model } from 'mongoose';
@@ -7,11 +7,13 @@ import { AddressDocument, AddressMongo } from 'src/server-adaptor-mongo/address.
 import { CreateAddressDto } from './dto/create-addresses.dto';
 import { UpdateAddressDto } from './dto/update-addresses.dto';
 import { GeocodingService } from 'src/geocoding/geocoding.service';
+import { WatMongo } from 'src/server-adaptor-mongo/wat.schema.mongo';
 
 @Injectable()
 export class AddressesService {
   constructor(@InjectModel('AddressMongo') private addressModel: Model<AddressMongo>,
-    private readonly geocodingService: GeocodingService
+    private readonly geocodingService: GeocodingService,
+    @InjectModel('WatMongo') private watModel: Model<WatMongo>,
   ) { }
 
   async createAddress(createaddressDto: CreateAddressDto): Promise<Address> {
@@ -20,7 +22,19 @@ export class AddressesService {
     //   throw new NotFoundException("Address already exist")
     // }
 
-    const address_lat_lng = await this.geocodingService.getCoordinates(createaddressDto.address);
+    const wat = await this.watModel.findOne({
+      _id: new mongoose.Types.ObjectId(createaddressDto.wat_id),
+    })
+
+    if (!wat) {
+      throw new NotFoundException('Wat not found');
+    }
+
+    const watName = wat.name;
+
+    console.log(watName);
+
+    const address_lat_lng = await this.geocodingService.getCoordinates(watName);
 
     const newAddress = new this.addressModel(
       {
@@ -29,6 +43,7 @@ export class AddressesService {
         longtitude: address_lat_lng.lng,
       }
     );
+    console.log(newAddress);
     newAddress.save();
     return this.toEntity(newAddress);
   }
@@ -45,25 +60,42 @@ export class AddressesService {
     const existAddress = await this.addressModel.findOne({
       wat_id: id
     });
+    console.log(existAddress);
     return existAddress ? this.toEntity(existAddress) : null
   }
 
   async updateAddressByWatId(wat_id: string, updateAddressDto: UpdateAddressDto): Promise<Address | null> {
-    const existAddress = await this.getAddressByWatId(wat_id);
-    const address_lat_lng = await this.geocodingService.getCoordinates(updateAddressDto.address);
-    if (!existAddress) {
-      throw new NotFoundException("Address not found")
+    // Validate wat_id
+    if (!wat_id) {
+      throw new BadRequestException('Invalid wat_id');
     }
-    
+    const existAddress = await this.getAddressByWatId(wat_id);
+  
+    let address_lat_lng;
+    try {
+      address_lat_lng = await this.geocodingService.getCoordinates(updateAddressDto.address);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch coordinates');
+    }
+
+    console.log(address_lat_lng.lat,address_lat_lng.lng)
+  
+    // Include coordinates in the update DTO if they are retrieved
+    const updatedData = {
+      ...updateAddressDto,
+      ...(address_lat_lng && { latitude: address_lat_lng.lat, longtitude: address_lat_lng.lng }),
+    };
+  
     const updatedAddress = await this.addressModel.findOneAndUpdate(
       {
         _id: new mongoose.Types.ObjectId(existAddress.id)
       },
-      updateAddressDto,
+      updatedData,
       
       { new: true },
     )
-    return updatedAddress ? this.toEntity(updatedAddress) : null
+  
+    return updatedAddress ? this.toEntity(updatedAddress) : null;
   }
 
   async updateAddressById(

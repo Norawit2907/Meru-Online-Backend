@@ -110,6 +110,7 @@ export class AuthService {
 
     const addresspayload = {
       wat_id: newWat.id,
+      wat_name: newWat.name,
       address: "-",
       street: "-",
       alley: "-",

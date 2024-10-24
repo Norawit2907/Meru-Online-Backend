@@ -7,6 +7,7 @@ import { AddonMongo, AddonSchema } from 'src/server-adaptor-mongo/addons.schema.
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: AddonMongo.name, schema: AddonSchema }]),
+
   ],
   controllers: [AddonsController],
   providers: [AddonsService]

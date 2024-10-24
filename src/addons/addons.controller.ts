@@ -22,6 +22,13 @@ export class AddonsController {
         return await this.addonsService.listAddons();
     }
 
+    @Get('/wat/:id')
+    async getAddonsByWatId(
+        @Param('id') id: string
+      ): Promise<Addon[]>{
+        return await this.addonsService.getAddonByWatId(id);
+      }
+
     @Put(':id')
     async updateAddonById(
         @Param('id') id: string,

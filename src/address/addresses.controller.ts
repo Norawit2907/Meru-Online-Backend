@@ -40,6 +40,7 @@ export class AddressesController {
   ): Promise<Address>{
     return await this.addressesService.getAddressByWatId(id);
   }
+  
 
   @Put('/wat/:id')
   async updateAddressByWatId(
