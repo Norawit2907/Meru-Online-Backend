@@ -34,6 +34,15 @@ export class AddressesController {
     return await this.addressesService.listAddresses();
   }
 
+  @Get(':id')
+  async getAddressByWatId(@Param('id') id: string): Promise<Address> {
+    const address = await this.addressesService.getAddressByWatId(id);
+    if (!address) {
+      throw new NotFoundException('Address not found!');
+    }
+    return address;
+  }
+
   @Put('/wat/:id')
   async updateAddressByWatId(
     @Param('id') id: string,

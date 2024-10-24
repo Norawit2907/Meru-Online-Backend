@@ -1,20 +1,14 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import axios from 'axios';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class GeocodingService {
-  private readonly googleApiKey: string;
-
-  constructor(private readonly configService: ConfigService) {
-    this.googleApiKey = this.configService.get<string>('GOOGLE_API_KEY');
-  }
 
   async getCoordinates(address: string): Promise<{ lat: number; lng: number }> {
     try {
       // Ensure the address is properly URL-encoded for special characters like Thai text
       const encodedAddress = encodeURIComponent(address);
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${this.googleApiKey}`;
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyC_qm58mcKFbpx4Gv9vQyLdK9hSrnpLA2s`;
 
       const response = await axios.get(url);
 

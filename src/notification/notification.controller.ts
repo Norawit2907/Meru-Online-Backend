@@ -38,6 +38,8 @@ import {
     async listNotification(): Promise<Notification[]> {
       return await this.notificationService.listNotification();
     }
+
+    
   
     // @UseGuards(AuthGuard)
     @Get(':id')
